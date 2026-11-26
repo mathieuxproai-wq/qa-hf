@@ -1,0 +1,6 @@
+=== PROBE2 ÉCRAN ÉTEINT 06:06:24 ===
+handshake: HTTP/1.1 101 WebSocket Protocol Handshake
+{"mode": "A", "sample": 0, "value": {"frames": "4173", "fps": "54", "chrono": "76692", "visibility": "visible", "hidden": false, "ts": 76794}}
+{"mode": "A", "sample": 1, "value": {"frames": "4341", "fps": "56", "chrono": "79705", "visibility": "visible", "hidden": false, "ts": 79796}}
+{"mode": "B", "arm": "armed"}
+{"mode": "B", "raf_in_3s": 160, "raf_fps": 53.3}

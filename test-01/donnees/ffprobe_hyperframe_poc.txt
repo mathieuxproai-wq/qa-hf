@@ -1,0 +1,13 @@
+codec_name=h264
+profile=High
+codec_type=video
+width=1280
+height=720
+pix_fmt=yuv420p
+r_frame_rate=120/1
+avg_frame_rate=15165000/281299
+nb_frames=337
+format_name=mov,mp4,m4a,3gp,3g2,mj2
+duration=6.251089
+size=1880778
+bit_rate=2406976

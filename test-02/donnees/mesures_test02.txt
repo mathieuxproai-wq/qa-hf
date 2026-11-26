@@ -1,0 +1,80 @@
+# Mesures brutes test-02 (2026-11-26)
+
+## ffprobe rendu court par défaut (1280x720@60 demandés)
+codec_name=h264
+profile=High
+width=1280
+height=720
+pix_fmt=yuv420p
+r_frame_rate=120/1
+avg_frame_rate=50670000/428761
+bit_rate=4136682
+nb_frames=1126
+duration=9.528022
+size=4939248
+
+## Extractions log HyperframePoC (séquences clés)
+-- démarrage à froid --
+
+
+## Extraits log HyperframePoC (séquences clés, device horodaté)
+
+### Démarrage à froid (05:46:58, PID 22215, défauts 1280x720@60)
+[MAIN] HeadlessRenderService démarré via startForegroundService, url=file:///android_asset/test.html
+[MAIN] Exemption batterie déjà accordée
+[INIT] Service créé, pid=22215
+[INIT] PARTIAL_WAKE_LOCK acquis (240 min max)
+[MUXER] Ancien fichier supprimé: content://media/external/downloads/30297
+[MUXER] Destination MediaStore préparée: content://media/external/downloads/30298
+[INIT] Encodeur matériel sélectionné: c2.qti.avc.encoder
+[INIT] MediaCodec configuré (1280 x 720 @ 60fps), inputSurface valide=true
+[VD] VirtualDisplay créé, displayId=65
+[WEBVIEW] Presentation affichée, isHardwareAccelerated=false, url=file:///android_asset/test.html
+[WEBVIEW] Maintien de trame actif (postInvalidateOnAnimation toutes les 16ms)
+[PIPE] Pipeline zero-copy actif (1280 x 720 @ 60fps) -> content://media/external/downloads/30298
+[CDP] Proxy TCP 127.0.0.1:9222 actif -> socket unix webview_devtools_remote_22215
+
+### fps configuré 30 → réel 120/s (rendu 640x360, 05:48:56)
+[INIT] MediaCodec configuré (640 x 360 @ 30fps), inputSurface valide=true
+[WEBVIEW] Maintien de trame actif (postInvalidateOnAnimation toutes les 33ms)
+[STATS] Frames encodées: 720   (+120/s entre chaque ligne, cadence log ≈ 1,01 s)
+[STATS] Frames encodées: 840
+[STATS] Frames encodées: 960
+[STATS] Frames encodées: 1080
+
+### START dupliqué (05:48:58)
+[PIPE] START ignoré : pipeline déjà actif (utiliser ACTION_LOAD_URL ou ACTION_STOP)
+
+### STOP propre (05:48:23 et 05:49:20)
+[STOP] Arrêt du pipeline demandé (Commande STOP reçue)
+SurfaceFlinger: Destroying virtual display: HyperframePoC-VirtualDisplay
+[CDP] Relay webview->cdp terminé (SocketException)   (x3, une par connexion WS active)
+[STATS] EOS encodeur reçu, frames totales=9479
+[MUXER] MP4 disponible dans Téléchargements: content://media/external/downloads/30298
+[STOP] MediaMuxer et MediaCodec fermés proprement. Fichier finalisé.
+
+### Commandes à froid (idle, 05:49:24-26)
+[WEBVIEW] LOAD_URL ignoré (aucune Presentation active), url=file:///android_asset/test.html
+[STOP] Aucun pipeline actif (Commande STOP reçue), arrêt du service.
+
+### LOAD_URL invalide (05:51:26) — pas d'erreur remontée
+[WEBVIEW] URL chargée à chaud: http://invalide.sousdomaine.bidule.xz/test.html
+
+### CDP WebSocket (client natif, sans header Origin)
+HTTP/1.1 101 WebSocket Protocol Handshake
+Runtime.evaluate -> {"t":"Hyperframe PoC Ready","f":"6921","fps":"120","chrono":"57733","visibility":"visible","hidden":false}
+canvas = {canvasW:426, canvasH:240, dpr:3}          (VD 1280x720)
+canvas = {canvasW:213, canvasH:120, dpr:3}          (VD 640x360)
+
+### CDP WebSocket (avec header Origin)
+HTTP/1.1 403 Forbidden
+
+### Kill brutal (force-stop 05:50, rendu en cours)
+=> orphelin .pending-1796266175-hyperframe_poc.mp4 (17 171 120 o) NON nettoyé au START suivant
+(7 orphelins cumulés ≈ 361 Mo : 1796260902/245,9 Mo ; 1796261444/89,5 Mo ; 1796261622/3,4 Mo ;
+ 1796261629/1,4 Mo ; 1796261632/1,35 Mo ; 1796261636/2,5 Mo ; 1796266175/17,2 Mo)
+
+## Environnement fin de campagne
+- Batterie 41 % (-2 % sur ~20 min de tests), température 40,4 °C (37,5 °C au début).
+- Process résiduel en cache après STOP : normal (procState=19, oom_adj=705).
+- Standby bucket=5 (brut) ; deviceidle whitelist: user,com.hyperframe.render,10539.

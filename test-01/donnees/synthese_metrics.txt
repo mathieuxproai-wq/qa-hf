@@ -1,0 +1,15 @@
+SYNTHÈSE MÉTRIQUES — Hyperframe Render (2026-11-26)
+====================================================
+Résolution encodage : 1280x720
+Codec vidéo          : H.264 High, yuv420p (c2.qti.avc.encoder, matériel)
+Bitrate              : ~2.4 Mbps
+Durée clip échantillon: 6.25 s / 337 frames
+Vitesse rendu (allumé): 120 fps (2x temps réel), stable
+Vitesse rendu (éteint) : ~54 fps (pas de throttle 1fps)
+CPU process          : ~3%
+Mémoire (Doze 3min)  : PSS ~112 Mo / RSS ~316 Mo (stable)
+OOM adj (actif)      : 50 (principal) / 51 (webview), procState=4 (fg service)
+Standby bucket       : 5 (brut MIUI) + deviceidle whitelist (exempt batterie)
+Doze force-idle 3min : PID survit, 56 fps, 0 LMKD/am_kill
+Readback CPU         : 0 (zero-copy createInputSurface)
+CDP 9222             : HTTP OK / WS 403 (--remote-allow-origins manquant)

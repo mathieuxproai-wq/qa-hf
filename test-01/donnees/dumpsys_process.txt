@@ -1,0 +1,7 @@
+    lastPssTime=-3m52s743ms pssProcState=19 pssStatType=0 nextPssTime=+14m57s914ms
+    oom adj: max=1001 curRaw=150 setRaw=150 cur=150 set=150
+    curProcState=19 mMaxProcState=0 mRepProcState=19 setProcState=19 lastStateTime=-2s86ms
+    lastPssTime=-20m51s892ms pssProcState=19 pssStatType=0 nextPssTime=+14m57s860ms
+    oom adj: max=1001 curRaw=905 setRaw=905 cur=905 set=905
+    curProcState=19 mMaxProcState=0 mRepProcState=19 setProcState=19 lastStateTime=-2s140ms
+      - ServiceRecord{1873c57 u0 com.hyperframe.render/org.chromium.content.app.SandboxedProcessService0:0 c:com.hyperframe.render}

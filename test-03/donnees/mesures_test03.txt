@@ -1,0 +1,42 @@
+# Mesures brutes test-03 (2026-11-26, 06:04–06:09 +03:00)
+
+## Sondes CDP — écran éteint (run 1, 06:06:24)
+handshake: HTTP/1.1 101 WebSocket Protocol Handshake (SANS header Origin)
+{"mode":"A","sample":0,"value":{"frames":"4173","fps":"54","chrono":"76692","visibility":"visible","hidden":false,"ts":76794}}
+{"mode":"A","sample":1,"value":{"frames":"4341","fps":"56","chrono":"79705","visibility":"visible","hidden":false,"ts":79796}}
+{"mode":"B","arm":"armed"}
+{"mode":"B","raf_in_3s":160,"raf_fps":53.3}
+→ compteur frames: +168 en 3,002 s = 56,0 fps
+
+## Sondes CDP — écran allumé (run 1 après keyevent 224, 06:06:48)
+{"mode":"A","sample":0,"value":{"frames":"6005","fps":"120","chrono":"100549","visibility":"visible","hidden":false,"ts":100638}}
+{"mode":"A","sample":1,"value":{"frames":"6365","fps":"120","chrono":"103546","visibility":"visible","hidden":false,"ts":103640}}
+{"mode":"B","raf_in_3s":720,"raf_fps":240.0}
+→ compteur frames: +360 en 3,002 s = 120,0 fps ; rAF direct 240/s (anomalie à examiner)
+
+## STATS encodage — run 1 (logcat HyperframePoC)
+Écran éteint (cadence log ~2,14-2,23 s pour +120 frames):
+06:06:22.934 4080 | 06:06:25.074 4200 | 06:06:27.213 4320 | 06:06:29.440 4440 | 06:06:31.670 4560 | 06:06:33.889 4680
+→ 53,8 à 56,1 fps
+Écran allumé (+120 / ~1,0 s):
+06:06:55.881 6840 | 06:06:56.878 6960 | 06:06:57.881 7080 | 06:06:59.049 7200 (creux 102,7 fps pendant bench GPU)
+
+## GPU — bench Vulkan compute (Turnip 27.0.0-devel, Adreno 830)
+Écran allumé, sans rendu :  iters=200 rounds=100 time=0.589s  5.9 ms/dispatch  18238.96 GFLOP/s
+Écran éteint, rendu actif:  iters=200 rounds=100 time=0.745s  7.4 ms/dispatch  14416.57 GFLOP/s
+Écran allumé, rendu actif:  iters=200 rounds=100 time=0.521s  5.2 ms/dispatch  20622.07 GFLOP/s
+
+## Run 2 — 100% écran éteint (06:08)
+mWakefulness=Dozing (avant am start ET après 12 s)
+STATS: 06:08:05.889 360 | 06:08:08.087 480 (54,6 fps) | 06:08:10.228 600 (56,1 fps)
+STOP 06:08:11: EOS encodeur reçu, frames totales=662 ; "[STOP] MediaMuxer et MediaCodec fermés proprement. Fichier finalisé."
+
+## ffprobe — video/hf_ecran_eteint.mp4 (md5 5088c3c2d64357dd3397606c0aa7a421 = device)
+codec_name=h264 ; profile=High ; 1280x720 ; yuv420p
+r_frame_rate=120/1 ; avg_frame_rate=7447500/132883 (=56,05)
+nb_frames=662 ; duration=11.811822 ; size=3662034 ; bit_rate=2480250
+
+## Environnement
+Batterie 40%→39% (décharge) ; température 38,3→39,5 °C
+Orphelins .pending: 7 (inchangé; aucun nouveau — 2 STOP propres)
+Événements écran: timeout naturel avant run 1 (~06:05) ; keyevent 224 réveil 06:06:42 ; keyevent 26 annulé par re-réveil <8 s ; keyevent 223 extinction stable pour run 2.

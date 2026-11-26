@@ -1,0 +1,19 @@
+11-26 05:35:34.274 22903 22903 I HyperframePoC: [INIT] Service créé, pid=22903
+11-26 05:35:34.276 22903 22903 I HyperframePoC: [INIT] PARTIAL_WAKE_LOCK acquis (240 min max)
+11-26 05:35:34.285 22903 22903 I HyperframePoC: [MUXER] Ancien fichier supprimé: content://media/external/downloads/30295
+11-26 05:35:34.291 22903 22903 I HyperframePoC: [MUXER] Destination MediaStore préparée: content://media/external/downloads/30296
+11-26 05:35:34.291 22903 22903 I HyperframePoC: [INIT] Encodeur matériel sélectionné: c2.qti.avc.encoder
+11-26 05:35:34.316 22903 22903 I HyperframePoC: [INIT] MediaCodec configuré (1280 x 720 @ 60fps), inputSurface valide=true
+11-26 05:35:34.319 22903 22903 I HyperframePoC: [VD] VirtualDisplay créé, displayId=63
+11-26 05:35:34.342 22903 22903 I HyperframePoC: [WEBVIEW] Presentation affichée, isHardwareAccelerated=false, url=file:///android_asset/test.html
+11-26 05:35:34.342 22903 22903 I HyperframePoC: [WEBVIEW] Maintien de trame actif (postInvalidateOnAnimation toutes les 16ms)
+11-26 05:35:34.342 22903 22903 I HyperframePoC: [PIPE] Pipeline zero-copy actif (1280 x 720 @ 60fps) -> content://media/external/downloads/30296
+11-26 05:35:34.345 22903 24661 I HyperframePoC: [CDP] Proxy TCP 127.0.0.1:9222 actif -> socket unix webview_devtools_remote_22903
+11-26 05:35:34.413 22903 24660 I HyperframePoC: [MUXER] Piste vidéo démarrée, écriture vers content://media/external/downloads/30296
+11-26 05:35:35.407 22903 24660 I HyperframePoC: [STATS] Frames encodées: 120
+11-26 05:35:36.409 22903 24660 I HyperframePoC: [STATS] Frames encodées: 240
+11-26 05:35:37.408 22903 24660 I HyperframePoC: [STATS] Frames encodées: 360
+11-26 05:35:38.409 22903 24660 I HyperframePoC: [STATS] Frames encodées: 480
+11-26 05:35:39.406 22903 24660 I HyperframePoC: [STATS] Frames encodées: 600
+11-26 05:35:40.409 22903 24660 I HyperframePoC: [STATS] Frames encodées: 720
+11-26 05:35:41.405 22903 24660 I HyperframePoC: [STATS] Frames encodées: 840

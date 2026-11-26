@@ -1,0 +1,4 @@
+    oom adj: max=1001 curRaw=50 setRaw=50 cur=50 set=50
+    curProcState=4 mMaxProcState=0 mRepProcState=4 setProcState=4 lastStateTime=-4s333ms
+    oom adj: max=1001 curRaw=51 setRaw=51 cur=51 set=51
+    curProcState=4 mMaxProcState=0 mRepProcState=4 setProcState=4 lastStateTime=-4s231ms
