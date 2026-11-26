@@ -1,0 +1,13 @@
+TEST-04 PHASE 2 — MESURES BRUTES (2026-11-26, device Redmi 2510DRK44C / Android 17 / Adreno 830)
+Écran: ÉTEINT (Dozing, mWakefulness=3) pendant TOUTE la campagne (sauf réveil final 10:04).
+
+[Install] apk_cp3_final_ui.apk (3 877 750 o, 09:21) -> install 09:22:43, versionName=1.0-phase1 (non incrémenté), DEBUGGABLE.
+[Token] auth_token.txt = 73fbd7e17199a23ca7ae2e5670bf9a4e26a3e7cba6469eef (48 hex, 09:47) = token UI utilisateur. Persiste entre redémarrages du service. Absent du logcat de l'app (0 occurrence HyperframePoC).
+[L fuite logcat] 11 occurrences du token = commandes de l'AGENT (ShellExecDiag/ToolChain), pas l'app.
+
+[B2 cycle] /start asset 1280x720@60 -> frames 155(3s) -> 708(11s); /load http://127.0.0.1:3000/scene.html -> frames continuent (708->710), CDP title "SCENE-T04-OK | 57fps | 980x551"; /load URL morte -> 200 {"status":"loading"} + CDP chrome-error (silencieux); /stop -> 1642 frames, MP4 (2).mp4 5 694 815 o, duration 30.045s, avg 54.65fps, h264 High yuv420p, md5 875823bc... OK moov.
+[B3 concurrence] POST /start x2 (3s, 1280x720@60 puis 1920x1080@30). Log: "[PIPE] START alors que pipeline actif : STOP interne puis redémarrage (garde-fou 4)". MP4 (3)=161 frames/2.976s/54.1fps (finalisé par le garde-fou) ; MP4 (4)=511 frames/9.517s/53.7fps 1920x1080. md5 OK x2. Displays: id77 (1280x720) remplacé par id78 (1920x1080), 1 seul à la fois ; après stop: grep -ci hyperframe = 0. /status incohérent ~3s pendant la bascule (fps:60/30416 alors que start 1080p accepté).
+[B4 écran éteint] start scène 1280x720@60 (09:59:22) -> keyevent 223 (déjà Dozing). +45s: HUD rAF CDP "120fps"; frames 156(09:59:25) -> 3427(10:00:15) -> 4849(10:00:28). Débit fin de run: 708 frames/6s = 118 fps. MP4 (6).mp4: 4855 frames/68.125s = 71.3 fps MOYEN (montée 55->118 en cours de run). md5 3c48fb20... moov OK. Pas de readback CPU (aucune chute).
+[B5 doze] force-idle 10:01:06 ("Now forced in to deep idle mode", mState=IDLE). +115s: running, 7432 frames, PID 6904 vivant. mState=INACTIVE relevé à 10:03:06 (retombée spontanée <=2min, cause non identifiée). S2: 8264 frames (832/7s = 119 fps). PSS 115 736 -> 127 287 Ko (+11,6 Mo/2min); RSS 328 646 -> 343 031 Ko. LMK/am_kill: 0. oom: cur=200 FGS (fg-service). MP4 (7).mp4: 8744 frames/135.8s = 64.4 fps, 50.8 Mo, md5 d4ad6659... OK.
+[Latence HTTP] /status x5: 3.49-3.95 ms ; /health: 4.0 ms (loopback).
+[.pending] 7 orphelins Phase 1 dans Download, aucun nouveau créé pendant la campagne (garde-fou OK), aucun nettoyage auto au boot.
